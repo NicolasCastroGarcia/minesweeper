@@ -1,0 +1,18 @@
+.cell {
+  width: 60px;
+  height: 60px;
+  background: #c0c0c0;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  border: 3px outset #ececec;
+}
+
+.show {
+  @extend .cell;
+  border: none;
+}
+
+.flag {
+  color: red;
+}
