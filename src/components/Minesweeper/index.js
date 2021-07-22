@@ -34,7 +34,8 @@ function Map() {
   }, [cellsClicked, map]);
 
   function newGame() {
-    //this functions creates the matrix, and starts the game
+    //this functions creates the matrix, starts the game, and resets the click counter
+    setCellsClicked(0);
     const newGame = createNewGame(map);
     setGameStatus("playing");
     setGame(newGame);
