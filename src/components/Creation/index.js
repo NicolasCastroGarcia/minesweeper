@@ -22,6 +22,8 @@ function Creation({ newMap }) {
         <label className={style.label}>Filas</label>
         <input
           type="number"
+          min="1"
+          max="999"
           value={map.rows}
           name="rows"
           onChange={handleChange}
@@ -31,6 +33,8 @@ function Creation({ newMap }) {
         <label className={style.label}>Columnas</label>
         <input
           type="number"
+          min="1"
+          max="999"
           value={map.columns}
           name="columns"
           onChange={handleChange}
@@ -40,6 +44,8 @@ function Creation({ newMap }) {
         <label className={style.label}>Minas</label>
         <input
           type="number"
+          min="1"
+          max="999"
           value={map.mines}
           name="mines"
           onChange={handleChange}
