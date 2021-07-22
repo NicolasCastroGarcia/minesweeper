@@ -7,8 +7,8 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
   const [color, setColor] = useState("lightgrey");
 
   useEffect(() => {
-    if (clicked && !flag && value === "bomb") {
-      //if we click on a bomb we lose
+    if (clicked && !flag && value === "mine") {
+      //if we click on a mine we lose
       lose();
     }
   }, [clicked, flag, value, lose]);
@@ -30,7 +30,7 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
       counter();
 
       //logic to set different colors based on value
-      if (value === "bomb") {
+      if (value === "mine") {
         setColor("red");
       } else if (typeof value === "number") {
         setColor("yellow");
@@ -56,7 +56,7 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
       onContextMenu={handleContextMenu}
       style={clicked && !flag ? { color: color } : {}}
     >
-      {clicked && !flag && value && <p>{value === "bomb" ? "💣" : value}</p>}
+      {clicked && !flag && value && <p>{value === "mine" ? "💣" : value}</p>}
 
       {flag && <span className={style.flag}>🚩</span>}
     </button>

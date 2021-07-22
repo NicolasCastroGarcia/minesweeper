@@ -16,3 +16,10 @@
 .flag {
   color: red;
 }
+
+@media only screen and (max-width: 768px) {
+  .cell {
+    width: calc(90vw / 10);
+    height: calc(90vw / 10);
+  }
+}

@@ -8,7 +8,7 @@ import Creation from "../Creation";
 function Map() {
   const [game, setGame] = useState(null);
   //contains the matrix of the minesweeper
-  const [map, setMap] = useState({ row: 10, columns: 10, bombs: 10 });
+  const [map, setMap] = useState({ row: 10, columns: 10, mines: 10 });
   //parameters that generate the matrix
   const [gameStatus, setGameStatus] = useState("start");
   //status of the game, can be: start, playing, finished, restart, win.
@@ -25,10 +25,10 @@ function Map() {
 
   useEffect(() => {
     //this useEffect watches the number of cells clicked, if you click all the safe cells you win
-    //safe cells are, total cells - bombs
+    //safe cells are, total cells - mines
 
     //this is not performant because it's updating the whole component each time a cell is clicked
-    if (cellsClicked === map.rows * map.columns - map.bombs) {
+    if (cellsClicked === map.rows * map.columns - map.mines) {
       setGameStatus("win");
     }
   }, [cellsClicked, map]);
@@ -47,7 +47,7 @@ function Map() {
   }
 
   function handleLose() {
-    //this is a callback function that is executed when you click on a bomb
+    //this is a callback function that is executed when you click on a mine
     setGameStatus("lose");
   }
 

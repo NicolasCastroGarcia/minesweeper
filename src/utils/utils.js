@@ -5,28 +5,28 @@ export function generateMatrix(row, columns) {
     .map(() => Array(columns).fill(""));
 }
 
-export function addBombs(matrix, bombs) {
-  //function that randomly populates the matrix with bombs
+export function addBombs(matrix, mines) {
+  //function that randomly populates the matrix with mines
 
   let rows = matrix.length;
   let cols = matrix[0].length;
 
-  Array.from(Array(bombs)).forEach((bomb) => {
+  Array.from(Array(mines)).forEach((mine) => {
     let y = generateRandomNumber(rows);
     let x = generateRandomNumber(cols);
     if (!matrix[y][x]) {
-      return (matrix[y][x] = "bomb");
+      return (matrix[y][x] = "mine");
     }
     return;
   });
 
   //this is the best way to do it, but using forEach so that I can show that I know how it works
 
-  // for (let i = bombs; i > 0; i--) {
+  // for (let i = mines; i > 0; i--) {
   //   let y = floorRand(rows);
   //   let x = floorRand(cols);
   //   if (!matrix[y][x]) {
-  //     matrix[y][x] = "bomb";
+  //     matrix[y][x] = "mine";
   //   }
   // }
 
@@ -38,8 +38,8 @@ export function addHints(matrix) {
 
   //   for (let i = 0; i < matrix.length; i++) {
   //     for (let j = 0; j < matrix[0].length; j++) {
-  //       if (matrix[i][j] === "bomb") {
-  //         matrix = addOneNestedArrAdjacents(matrix, i, j, "bomb");
+  //       if (matrix[i][j] === "mine") {
+  //         matrix = addOneNestedArrAdjacents(matrix, i, j, "mine");
   //       }
   //     }
   //   }
@@ -48,7 +48,7 @@ export function addHints(matrix) {
 
   matrix.forEach((row, rowPosition) => {
     row.forEach((column, columnPosition) => {
-      if (column === "bomb") {
+      if (column === "mine") {
         matrix = filledMatrix(matrix, rowPosition, columnPosition);
       }
     });
@@ -67,9 +67,9 @@ function filledMatrix(matrix, rowPosition, columnPosition) {
   for (let a of rows) {
     if (matrix[a]) {
       for (let b of columns) {
-        if (matrix[a][b] !== undefined && matrix[a][b] !== "bomb") {
-          //we need to validate undefined in case the bomb is on an edge and there is no number to show next to it because it would fall outside of the matrix
-          //we need to validate that the cell it's not a bomb so that we do not override the bomb value
+        if (matrix[a][b] !== undefined && matrix[a][b] !== "mine") {
+          //we need to validate undefined in case the mine is on an edge and there is no number to show next to it because it would fall outside of the matrix
+          //we need to validate that the cell it's not a mine so that we do not override the mine value
           //and then, we add a value to that cell, based on the surrounding cells
           matrix[a][b]++;
         }
@@ -84,7 +84,7 @@ function generateRandomNumber(scale) {
   return Math.floor(Math.random() * scale);
 }
 
-export function createNewGame({ rows = 10, columns = 10, bombs = 10 }) {
+export function createNewGame({ rows = 10, columns = 10, mines = 10 }) {
   //should normalize inputs with typescript
-  return addHints(addBombs(generateMatrix(rows, columns), bombs));
+  return addHints(addBombs(generateMatrix(rows, columns), mines));
 }

@@ -24,10 +24,31 @@
     }
   }
 
-  .create {
+  .button {
     border: 2px outset #ececec;
     font-weight: bold;
     height: 40px;
     cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .creation {
+    width: 95%;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .inputContainer {
+      width: 100%;
+      text-align: center;
+
+      input {
+        text-align: center;
+      }
+    }
+
+    .button {
+      width: 100%;
+    }
   }
 }
