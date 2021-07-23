@@ -2,7 +2,7 @@
 
 ## Introducción
 
-> Buscaminas básico, sin cronometro. Tiempo dedicado: **3 horas**.
+> Buscaminas básico, sin cronometro. Tiempo dedicado: **4 horas**.
 
 ## ¿Cómo jugar?
 
@@ -16,7 +16,7 @@ Estás por ver algo hecho rápidamente. El código está comentado, y tiene prob
 ### Principales problemas:
 
 - No hay validación de tipos, ni ningun proceso de testing.
-- Actualización: La aplicación de minesweeper podría estar mejor componentizada y usar otras estrategias para reflejar el cambio de la matriz y el conteo de las celdas clickeadas.
+- Actualización: La aplicación de minesweeper podría estar mejor componentizada y usar otras estrategias para el conteo de las celdas clickeadas.
 - HTML semántico: las etiquetas utilizadas son básicas, debería haber un `<aside>` al menos para las opciones y un `<article>` con un `titulo` correspondiente para el tablero en sí.
 - Estilos: hay estilos en línea innecesarios. No hay variables globales en la implementación de los colores, y el css se repite.
 
