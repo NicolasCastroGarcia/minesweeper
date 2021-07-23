@@ -4,7 +4,7 @@ import style from "./style.module.scss";
 function Cell({ row, column, value, gameStatus, lose, counter }) {
   const [clicked, setClicked] = useState(false);
   const [flag, setFlag] = useState(false);
-  const [color, setColor] = useState("lightgrey");
+  const [color, setColor] = useState("yellow");
 
   useEffect(() => {
     if (clicked && !flag && value === "mine") {
@@ -15,10 +15,10 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
 
   useEffect(() => {
     //if gameStatus changes from lose, we restart all cells
-    if (gameStatus !== "lose") {
+    if (gameStatus === "start") {
       setClicked(false);
       setFlag(false);
-      setColor("lightgrey");
+      setColor("yellow");
     }
   }, [gameStatus]);
 
@@ -30,10 +30,11 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
       counter();
 
       //logic to set different colors based on value
-      if (value === "mine") {
+      if (value === 2) {
+        setColor("darkorange");
+      }
+      if (value > 2) {
         setColor("red");
-      } else if (typeof value === "number") {
-        setColor("yellow");
       }
     }
   }

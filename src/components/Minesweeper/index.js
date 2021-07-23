@@ -11,14 +11,12 @@ function Map() {
   const [map, setMap] = useState({ row: 10, columns: 10, mines: 10 });
   //parameters that generate the matrix
   const [gameStatus, setGameStatus] = useState("start");
-  //status of the game, can be: start, playing, finished, restart, win.
+  //status of the game, can be: start, inprogress, win, lose.
   const [cellsClicked, setCellsClicked] = useState(0);
 
   useEffect(() => {
-    //this useEfect watches gamestatus and executes the functions accordingly
-    //status finished and win are ommited.
-
-    if (gameStatus === "start" || gameStatus === "restart") {
+    //this useEfect watches gamestatus and executes the function if gameStatus is start
+    if (gameStatus === "start") {
       newGame();
     }
   }, [gameStatus]);
@@ -37,7 +35,7 @@ function Map() {
     //this functions creates the matrix, starts the game, and resets the click counter
     setCellsClicked(0);
     const newGame = createNewGame(map);
-    setGameStatus("playing");
+    setGameStatus("inprogress");
     setGame(newGame);
   }
 
@@ -60,7 +58,7 @@ function Map() {
     //we set the new map data
     setMap(newMap);
     //we change gameStatus so that the matrix is generated again
-    setGameStatus("restart");
+    setGameStatus("start");
   }
 
   return (
