@@ -14,7 +14,7 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
   }, [clicked, flag, value, lose]);
 
   useEffect(() => {
-    //if gameStatus changes from lose, we restart all cells
+    //if gameStatus is start, we restart all states
     if (gameStatus === "start") {
       setClicked(false);
       setFlag(false);

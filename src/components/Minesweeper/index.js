@@ -25,7 +25,6 @@ function Map() {
     //this useEffect watches the number of cells clicked, if you click all the safe cells you win
     //safe cells are, total cells - mines
 
-    //this is not performant because it's updating the whole component each time a cell is clicked
     if (cellsClicked === map.rows * map.columns - map.mines) {
       setGameStatus("win");
     }
@@ -51,6 +50,9 @@ function Map() {
 
   function handleClickCount() {
     //this is a callback function that counts how many cells are clicked
+    //this is not ideal because it's updating the whole component each time a cell is clicked
+    //a "simple" solution would be to move this state (CellsClicked) to another component so that only that component is rerendered
+    //if we try to use redux, the same problem appears because useSelector causes a rerender in the component it's called and all it's children
     setCellsClicked((prev) => prev + 1);
   }
 
