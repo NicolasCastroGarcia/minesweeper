@@ -1,39 +1,48 @@
-export function generateMatrix(row, columns) {
+function generateMatrix(row, columns) {
   //creating an empty array of n rows, each row will have n number of columns that will be filled with an empty string
   return Array(row)
     .fill()
     .map(() => Array(columns).fill(""));
 }
 
-export function addBombs(matrix, mines) {
+function addMines(matrix, mines) {
   //function that randomly populates the matrix with mines
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let minesQuantity = mines;
 
-  let rows = matrix.length;
-  let cols = matrix[0].length;
+  if (rows * cols < minesQuantity) {
+    //we do this to avoid more mines than necessary
+    minesQuantity = rows * cols;
+  }
 
-  Array.from(Array(mines)).forEach((mine) => {
+  Array.from(Array(minesQuantity)).forEach(() => {
     let y = generateRandomNumber(rows);
     let x = generateRandomNumber(cols);
-    if (!matrix[y][x]) {
-      return (matrix[y][x] = "mine");
-    }
-    return;
+    return checkForMine(matrix, x, y);
   });
-
-  //this is the best way to do it, but using forEach so that I can show that I know how it works
-
-  // for (let i = mines; i > 0; i--) {
-  //   let y = floorRand(rows);
-  //   let x = floorRand(cols);
-  //   if (!matrix[y][x]) {
-  //     matrix[y][x] = "mine";
-  //   }
-  // }
 
   return matrix;
 }
 
-export function addHints(matrix) {
+function checkForMine(matrix, x, y) {
+  //abusing recursivity to add the right amount of mines
+  let newY = y;
+  let newX = x;
+
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+
+  if (matrix[y][x] == "mine") {
+    newY = generateRandomNumber(rows);
+    newX = generateRandomNumber(cols);
+    return checkForMine(matrix, newY, newX);
+  } else {
+    return (matrix[newY][newX] = "mine");
+  }
+}
+
+function addHints(matrix) {
   //better performance, less legibility
 
   //   for (let i = 0; i < matrix.length; i++) {
@@ -86,5 +95,5 @@ function generateRandomNumber(scale) {
 
 export function createNewGame({ rows = 10, columns = 10, mines = 10 }) {
   //should normalize inputs with typescript
-  return addHints(addBombs(generateMatrix(rows, columns), mines));
+  return addHints(addMines(generateMatrix(rows, columns), mines));
 }

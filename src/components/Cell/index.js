@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { increment, setMine } from "../../reducers/GameReducer";
 import style from "./style.module.scss";
 
-function Cell({ row, column, value, gameStatus, lose, counter }) {
+function Cell({ row, column, value, lose, gameStatus }) {
+  //initial state
   const [clicked, setClicked] = useState(false);
   const [flag, setFlag] = useState(false);
   const [color, setColor] = useState("yellow");
+  //redux
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    //this useEffect is excecuted each time the state or value changes
     if (clicked && !flag && value === "mine") {
-      //if we click on a mine we lose
+      dispatch(setMine(true));
       lose();
     }
-  }, [clicked, flag, value, lose]);
+  }, [clicked, flag, value]);
 
   useEffect(() => {
     //if gameStatus is start, we restart all states
@@ -20,14 +26,14 @@ function Cell({ row, column, value, gameStatus, lose, counter }) {
       setFlag(false);
       setColor("yellow");
     }
-  }, [gameStatus]);
+  }, [gameStatus, value]);
 
   function handleClick() {
     if (!clicked && !flag) {
       // if it was not clicked, and there is no flag set as clicked
       setClicked(true);
-      //sending callback click
-      counter();
+
+      dispatch(increment());
 
       //logic to set different colors based on value
       if (value === 2) {

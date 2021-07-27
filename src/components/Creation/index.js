@@ -8,11 +8,12 @@ function Creation({ newMap }) {
   function handleChange(e) {
     //function that saves data in state, it's more performant if we have 3 different states (rows, columns, mines)
     const { name, valueAsNumber } = e.target;
+
     setMapData({ ...map, [name]: valueAsNumber });
   }
 
   function handleClick() {
-    //we sent with the callback, de newData
+    //we send with the callback, de newData
     newMap(map);
   }
 
@@ -23,7 +24,6 @@ function Creation({ newMap }) {
         <input
           type="number"
           min="1"
-          max="999"
           value={map.rows}
           name="rows"
           onChange={handleChange}
@@ -34,7 +34,6 @@ function Creation({ newMap }) {
         <input
           type="number"
           min="1"
-          max="999"
           value={map.columns}
           name="columns"
           onChange={handleChange}
@@ -45,7 +44,6 @@ function Creation({ newMap }) {
         <input
           type="number"
           min="1"
-          max="999"
           value={map.mines}
           name="mines"
           onChange={handleChange}
