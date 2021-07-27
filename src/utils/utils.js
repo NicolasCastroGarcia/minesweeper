@@ -17,8 +17,8 @@ function addMines(matrix, mines) {
   }
 
   Array.from(Array(minesQuantity)).forEach(() => {
-    let y = generateRandomNumber(rows);
     let x = generateRandomNumber(cols);
+    let y = generateRandomNumber(rows);
     return checkForMine(matrix, x, y);
   });
 
@@ -27,16 +27,17 @@ function addMines(matrix, mines) {
 
 function checkForMine(matrix, x, y) {
   //abusing recursivity to add the right amount of mines
-  let newY = y;
   let newX = x;
+  let newY = y;
 
   const rows = matrix.length;
   const cols = matrix[0].length;
 
   if (matrix[y][x] == "mine") {
-    newY = generateRandomNumber(rows);
     newX = generateRandomNumber(cols);
-    return checkForMine(matrix, newY, newX);
+    newY = generateRandomNumber(rows);
+
+    return checkForMine(matrix, newX, newY);
   } else {
     return (matrix[newY][newX] = "mine");
   }
