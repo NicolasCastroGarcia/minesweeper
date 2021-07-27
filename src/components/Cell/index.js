@@ -62,11 +62,15 @@ function Cell({
     }
   }
 
+  function handleDeveloperMode() {
+    console.log(value);
+  }
+
   return (
     <button
       id={`${row}_${column}`}
       className={clicked && !flag ? `${style.cell} ${style.show}` : style.cell}
-      onClick={handleClick}
+      onClick={!developerMode ? handleClick : handleDeveloperMode()}
       onContextMenu={handleContextMenu}
       style={clicked && !flag ? { color: color } : {}}
     >
