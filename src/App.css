@@ -3,6 +3,10 @@
   user-select: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
   display: flex;

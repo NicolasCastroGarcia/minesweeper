@@ -3,7 +3,14 @@ import { useDispatch } from "react-redux";
 import { increment, setMine } from "../../reducers/GameReducer";
 import style from "./style.module.scss";
 
-function Cell({ row, column, value, lose, gameStatus }) {
+function Cell({
+  row,
+  column,
+  value,
+  changeGameStatus,
+  gameStatus,
+  developerMode
+}) {
   //initial state
   const [clicked, setClicked] = useState(false);
   const [flag, setFlag] = useState(false);
@@ -15,7 +22,7 @@ function Cell({ row, column, value, lose, gameStatus }) {
     //this useEffect is excecuted each time the state or value changes
     if (clicked && !flag && value === "mine") {
       dispatch(setMine(true));
-      lose();
+      changeGameStatus("lose");
     }
   }, [clicked, flag, value]);
 
@@ -63,9 +70,11 @@ function Cell({ row, column, value, lose, gameStatus }) {
       onContextMenu={handleContextMenu}
       style={clicked && !flag ? { color: color } : {}}
     >
-      {clicked && !flag && value && <p>{value === "mine" ? "💣" : value}</p>}
-
+      {!developerMode && clicked && !flag && value && (
+        <p>{value === "mine" ? "💣" : value}</p>
+      )}
       {flag && <span className={style.flag}>🚩</span>}
+      {developerMode && value}
     </button>
   );
 }

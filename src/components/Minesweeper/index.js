@@ -11,7 +11,8 @@ function Map() {
   const [map, setMap] = useState({ row: 10, columns: 10, mines: 10 });
   //parameters that generate the matrix
   const [gameStatus, setGameStatus] = useState("start");
-  //status of the game, can be: start, inprogress, win, lose.
+  //status of the game, can be: start, inprogress, lose.
+  const [developerMode, setDeveloperMode] = useState(false);
 
   useEffect(() => {
     //this useEfect watches gamestatus and executes the function if gameStatus is start
@@ -27,9 +28,8 @@ function Map() {
     setGame(newGame);
   }
 
-  function handleLose() {
-    //this is a callback function that is executed when you click on a mine
-    setGameStatus("lose");
+  function changeGameStatus(status) {
+    setGameStatus(status);
   }
 
   function changeMap(newMap) {
@@ -39,13 +39,13 @@ function Map() {
     setGameStatus("start");
   }
 
-  function handleRestart() {
-    setGameStatus("start");
+  function handleDeveloperMode() {
+    setDeveloperMode((prev) => !prev);
   }
 
   return (
     <>
-      <Creation newMap={changeMap} />
+      <Creation newMap={changeMap} developerMode={handleDeveloperMode} />
       <div className={style.map}>
         {game?.map((row, rowNumber) => {
           return (
@@ -57,8 +57,9 @@ function Map() {
                     row={rowNumber}
                     column={columnNumber}
                     value={column}
-                    lose={handleLose}
+                    changeGameStatus={changeGameStatus}
                     gameStatus={gameStatus}
+                    developerMode={developerMode}
                   />
                 );
               })}
@@ -66,7 +67,8 @@ function Map() {
           );
         })}
       </div>
-      <Message start={handleRestart} map={map} />
+
+      <Message changeGameStatus={changeGameStatus} map={map} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import style from "./style.module.scss";
 
-function Creation({ newMap }) {
+function Creation({ newMap, developerMode }) {
   //each input should be a component
   const [map, setMapData] = useState({ rows: 10, columns: 10, mines: 10 });
 
@@ -19,6 +19,7 @@ function Creation({ newMap }) {
 
   return (
     <div className={style.creation}>
+      <button onClick={() => developerMode()}>x</button>
       <div className={style.inputContainer}>
         <label className={style.label}>Filas</label>
         <input

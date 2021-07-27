@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setMine, setClicks } from "../../reducers/GameReducer";
 
-function Message({ start, map }) {
+function Message({ changeGameStatus, map }) {
   //this component breaks accessibility because it doesn't changes focus to this. Instead, it keeps the focus in the minesweeper component
   const [status, setStatus] = useState(false);
   const game = useSelector((state) => state.game);
@@ -17,7 +17,7 @@ function Message({ start, map }) {
     setStatus(false);
     dispatch(setClicks(0));
     dispatch(setMine(false));
-    start();
+    changeGameStatus("start");
   }
 
   useEffect(() => {
