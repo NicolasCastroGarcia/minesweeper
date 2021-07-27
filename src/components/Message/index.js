@@ -27,7 +27,7 @@ function Message({ changeGameStatus, map }) {
   function handleGame() {
     const { clicks, mine } = game;
 
-    if (clicks == safeCells) {
+    if (clicks == safeCells && safeCells > 0) {
       setStatus("win");
     }
 
